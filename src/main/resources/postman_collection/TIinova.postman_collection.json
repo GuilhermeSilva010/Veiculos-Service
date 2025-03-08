@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "cac22e00-efb6-4226-85f4-2973a47da046",
+		"name": "TIinova",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21685926"
+	},
+	"item": [
+		{
+			"name": "Veiculos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/veiculos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo - Filtro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/veiculos?ano=2021",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos"
+					],
+					"query": [
+						{
+							"key": "marca",
+							"value": "Fiat",
+							"disabled": true
+						},
+						{
+							"key": "ano",
+							"value": "2021"
+						},
+						{
+							"key": "cor",
+							"value": "preto",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/veiculos?marca=Toyota&ano=2020&cor=preto\"\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo - Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/veiculos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:8080/veiculos/1\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo - Add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"marca\": \"Toyota\",\r\n  \"ano\": 2020,\r\n  \"cor\": \"preto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/veiculos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/veiculos \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"marca\": \"Toyota\",\r\n  \"ano\": 2020,\r\n  \"cor\": \"preto\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo - Atualizar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"marca\": \"Honda\",\r\n  \"ano\": 2021,\r\n  \"cor\": \"azul\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/veiculos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://localhost:8080/veiculos/1 \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"marca\": \"Honda\",\r\n  \"ano\": 2021,\r\n  \"cor\": \"azul\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo Atualizacao Parcial",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cor\": \"azul\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/veiculos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PATCH http://localhost:8080/veiculos/1 \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"cor\": \"vermelho\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Veiculo - Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/veiculos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE http://localhost:8080/veiculos/1\r\n"
+			},
+			"response": []
+		}
+	]
+}
