@@ -30,7 +30,7 @@ Certifique-se de ter os seguintes softwares instalados:
 
 1. **Clonar o repositório**:
    ```bash
-   git clone https://github.com/yourusername/veiculos-api.git
+   git clone https://github.com/GuilhermeSilva010/Veiculos-Service.git
 
 2. **Rodar o Banco de Dados com Docker**:
 
