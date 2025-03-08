@@ -48,14 +48,11 @@ Navegue até a pasta do projeto e execute o seguinte comando para compilar a apli
 ```bash
 mvn clean install
 ```
-Logo em seguida:
-```bash
-mvn spring-boot:run
-```
+Logo em seguida rode a classe CoderApplication.
 
 ### Acessando documentação no Swagger:
 
-A API estará disponível em http://localhost:8080/documentacao.
+API estará disponível em http://localhost:8080/documentacao.
 
 ### Testando a API com Postman:
 

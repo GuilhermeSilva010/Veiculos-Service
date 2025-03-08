@@ -1,11 +1,13 @@
 package com.tinnova.coder.domain;
 
+import com.tinnova.coder.controller.dto.VeiculoDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor
 @Entity
 public class Veiculo {
 
@@ -17,6 +19,12 @@ public class Veiculo {
     private Integer ano;
     private String cor;
 
+    public Veiculo(VeiculoDto veiculo) {
+        this.id = veiculo.getId();
+        this.marca = veiculo.getMarca();
+        this.ano = veiculo.getAno();
+        this.cor = veiculo.getCor();
+    }
     // Getters e Setters
 
     public Long getId() {

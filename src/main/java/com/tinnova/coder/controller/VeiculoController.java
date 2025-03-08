@@ -1,5 +1,6 @@
 package com.tinnova.coder.controller;
 
+import com.tinnova.coder.controller.dto.VeiculoDto;
 import com.tinnova.coder.domain.Veiculo;
 import com.tinnova.coder.service.VeiculoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,56 +19,53 @@ import java.util.Optional;
 public class VeiculoController {
 
     @Autowired
-    private VeiculoService veiculoService;  // Supondo que você tenha um serviço que manipula a lógica de negócios
+    private VeiculoService veiculoService;
 
     @Operation(summary = "Recupera todos os veículos", description = "Retorna uma lista de veículos com filtros opcionais como marca, ano ou cor.")
     @GetMapping
-    public List<Veiculo> getAllVeiculos(
-            @RequestParam(required = false) String marca,  // Parâmetro opcional
-            @RequestParam(required = false) Integer ano,   // Parâmetro opcional
-            @RequestParam(required = false) String cor) { // Parâmetro opcional
-        if (marca != null || ano != null || cor != null) {
-            return veiculoService.findByMarcaAnoCor(marca, ano, cor);
-        }
-        return veiculoService.findAll();
+    public List<VeiculoDto> getAllVeiculos(
+            @RequestParam(required = false) String marca,
+            @RequestParam(required = false) Integer ano,
+            @RequestParam(required = false) String cor) {
+        return veiculoService.findVeiculos(marca, ano, cor);
     }
 
     @Operation(summary = "Recupera um veículo por ID", description = "Retorna um veículo específico pelo seu ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Veiculo> getVeiculoById(@PathVariable Long id) {
-        Optional<Veiculo> veiculo = veiculoService.findById(id);
-        if (veiculo.isPresent()) {
-            return ResponseEntity.ok(veiculo.get());
+    public ResponseEntity<VeiculoDto> getVeiculoById(@PathVariable Long id) {
+        Optional<VeiculoDto> veiculoExistente = veiculoService.getVeiculoById(id);
+
+        if (veiculoExistente.isPresent()) {
+            return ResponseEntity.ok(veiculoExistente.get());
         }
+
         return ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Cria um novo veículo", description = "Cria um novo veículo com os dados fornecidos.")
     @PostMapping
-    public ResponseEntity<Veiculo> createVeiculo(@RequestBody Veiculo veiculo) {
-        Veiculo novoVeiculo = veiculoService.save(veiculo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoVeiculo);
+    public ResponseEntity<VeiculoDto> createVeiculo(@RequestBody VeiculoDto veiculo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(veiculoService.save(new Veiculo(veiculo)));
     }
 
     @Operation(summary = "Atualiza um veículo", description = "Atualiza os dados de um veículo existente. O ID do veículo é passado na URL e os dados a serem atualizados são enviados no corpo da requisição.")
     @PutMapping("/{id}")
-    public ResponseEntity<Veiculo> updateVeiculo(@PathVariable Long id, @RequestBody Veiculo veiculo) {
-        Optional<Veiculo> veiculoExistente = veiculoService.findById(id);
-        if (veiculoExistente.isPresent()) {
-            veiculo.setId(id); // Atualiza o ID do veiculo com o valor passado na URL
-            Veiculo veiculoAtualizado = veiculoService.save(veiculo);
-            return ResponseEntity.ok(veiculoAtualizado);
+    public ResponseEntity<VeiculoDto> updateVeiculo(@PathVariable Long id, @RequestBody VeiculoDto veiculo) {
+        Optional<VeiculoDto> veiculoAtualizado = veiculoService.updateVeiculo(id, veiculo);
+
+        if (veiculoAtualizado.isPresent()) {
+            return ResponseEntity.ok(veiculoAtualizado.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Atualiza parcialmente um veículo", description = "Atualiza parcialmente os dados de um veículo existente. Apenas os campos fornecidos no corpo da requisição serão atualizados.")
     @PatchMapping("/{id}")
-    public ResponseEntity<Veiculo> partialUpdateVeiculo(@PathVariable Long id, @RequestBody Veiculo veiculo) {
-        Optional<Veiculo> veiculoExistente = veiculoService.findById(id);
-        if (veiculoExistente.isPresent()) {
-            Veiculo veiculoAtualizado = veiculoService.partialUpdate(id, veiculo);
-            return ResponseEntity.ok(veiculoAtualizado);
+    public ResponseEntity<VeiculoDto> partialUpdateVeiculo(@PathVariable Long id, @RequestBody VeiculoDto veiculo) {
+        Optional<VeiculoDto> veiculoAtualizado = veiculoService.updateVeiculo(id, veiculo);
+
+        if (veiculoAtualizado.isPresent()) {
+            return ResponseEntity.ok(veiculoAtualizado.get());
         }
         return ResponseEntity.notFound().build();
     }
@@ -75,11 +73,12 @@ public class VeiculoController {
     @Operation(summary = "Deleta um veículo", description = "Deleta um veículo existente, identificado pelo ID passado na URL. Retorna uma resposta vazia com status 204 se a operação for bem-sucedida.")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVeiculo(@PathVariable Long id) {
-        Optional<Veiculo> veiculoExistente = veiculoService.findById(id);
+        Optional<VeiculoDto> veiculoExistente = veiculoService.delete(id);
+
         if (veiculoExistente.isPresent()) {
-            veiculoService.delete(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();  // Sucesso na exclusão
         }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.notFound().build();  // Veículo não encontrado
     }
 }
