@@ -8,6 +8,6 @@ class CoderApplicationTest {
 
     @Test
     void contextLoads() {
-        // Este teste vai verificar se o contexto da aplicação carrega corretamente
+        // Este teste vai verificar se o contexto da aplicacao carrega corretamente
     }
 }

@@ -29,7 +29,6 @@ public class MockDataConfig {
                 veiculo3.setAno(2022);
                 veiculo3.setCor("Prata");
 
-                // Salvar no banco de dados apenas se não existirem registros
                 veiculoRepository.save(veiculo1);
                 veiculoRepository.save(veiculo2);
                 veiculoRepository.save(veiculo3);

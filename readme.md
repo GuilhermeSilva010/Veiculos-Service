@@ -48,7 +48,10 @@ Navegue até a pasta do projeto e execute o seguinte comando para compilar a apli
 ```bash
 mvn clean install
 ```
-Logo em seguida rode a classe CoderApplication.
+Logo em seguida rode a classe CoderApplication do SpringBoot.
+
+**Ao subir a aplicação será inserido automaticamente dados mockados no banco de dados estando pronto para uso.**
+
 
 ### Acessando documentação no Swagger:
 
@@ -72,3 +75,24 @@ A estrutura do projeto segue os princípios da Clean Architecture, com as seguint
 - **service**: Lógica de negócios, onde as regras de manipulação dos dados das entidades são executadas.
 - **repository**: Responsável pela comunicação com o banco de dados, realizando as operações CRUD.
 - **exercícios**: Os exercícios propostos no projeto podem ser encontrados dentro da pasta `exercicios`. Cada exercício está dentro de sua respectiva pasta, e deve ser seguido o passo a passo de implementação de acordo com as instruções fornecidas.
+
+
+### Tratamento Global de Exceções
+
+A aplicação utiliza **Controller Advice** para o tratamento centralizado de exceções. O @ControllerAdvice permite capturar e processar exceções lançadas em qualquer controlador, garantindo respostas padronizadas e melhorando a manutenção do código.
+
+Sempre que uma exceção ocorre, o sistema a intercepta e retorna uma resposta adequada com um código de status HTTP correspondente e uma mensagem clara para o cliente.
+
+Benefícios:
+Centralização do tratamento de erros, evitando duplicação de código nos controladores.
+Padronização das respostas de erro, facilitando o consumo da API.
+Melhoria na manutenção, permitindo a adição de novos tratamentos sem modificar diretamente os controladores.
+
+## Testes Unitários
+
+Foram criados testes unitários da aplicação de Veiculos das camadas de service, controller e repository.
+
+Para rodar os testes você pode ir até a pasta de testes e executar todos na pasta raiz ou se preferir rode o comando abaixo:
+```bash
+mvn test
+```

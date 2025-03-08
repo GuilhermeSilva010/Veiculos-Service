@@ -16,7 +16,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)  // Certifique-se de que o Mockito está sendo usado corretamente
+@ExtendWith(MockitoExtension.class)
 class VeiculoControllerTest {
 
     @InjectMocks
