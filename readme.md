@@ -59,7 +59,7 @@ API estará disponível em http://localhost:8080/documentacao.
 
 ### Testando a API com Postman:
 
-Para testar os endpoints da API, use o Postman. O arquivo de coleções do Postman pode ser encontrado na pasta Postman_Collections em resources.
+Para testar os endpoints da API, use o Postman. O arquivo de coleções do Postman pode ser encontrado na pasta **Postman_Collections** em resources.
 
 ### Estrutura do Projeto
 A estrutura do projeto segue os princípios da Clean Architecture, com as seguintes pastas e responsabilidades:

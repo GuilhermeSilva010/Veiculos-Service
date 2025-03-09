@@ -6,21 +6,37 @@ public class EleicoesMain {
 
     // Função principal para testar a classe
     public static void main(String[] args) {
-        // Criação do scanner para leitura de dados
         Scanner scanner = new Scanner(System.in);
+        int totalEleitores, votosValidos, votosEmBranco, votosNulos;
 
-        // Solicitar os dados do usuário com validação para aceitar apenas números inteiros
-        int totalEleitores = validacaoNumerosEntrada(scanner, "Digite o total de eleitores: ");
-        int votosValidos = validacaoNumerosEntrada(scanner, "Digite o numero de votos validos: ");
-        int votosEmBranco = validacaoNumerosEntrada(scanner, "Digite o numero de votos em branco: ");
-        int votosNulos = validacaoNumerosEntrada(scanner, "Digite o numero de votos nulos: ");
+        while (true) {
+            System.out.print("Digite o total de eleitores: ");
+            totalEleitores = scanner.nextInt();
 
-        Eleicoes eleicoes = new Eleicoes(totalEleitores, votosValidos, votosEmBranco, votosNulos);
+            System.out.print("Digite o número de votos válidos: ");
+            votosValidos = scanner.nextInt();
 
-        // Exibe os resultados dos percentuais
-        System.out.println("Percentual de votos validos: " + eleicoes.calcularPercentualVotosValidos() + "%");
-        System.out.println("Percentual de votos em branco: " + eleicoes.calcularPercentualVotosEmBranco() + "%");
-        System.out.println("Percentual de votos nulos: " + eleicoes.calcularPercentualVotosNulos() + "%");
+            System.out.print("Digite o número de votos em branco: ");
+            votosEmBranco = scanner.nextInt();
+
+            System.out.print("Digite o número de votos nulos: ");
+            votosNulos = scanner.nextInt();
+
+            int totalVotos = votosValidos + votosEmBranco + votosNulos;
+
+            if (totalVotos > totalEleitores) {
+                System.out.println("Erro! O total de votos (" + totalVotos + ") excede o número de eleitores (" + totalEleitores + ").");
+                System.out.println("Por favor, insira os dados novamente.\n");
+            } else {
+                break;
+            }
+        }
+
+        Eleicoes eleicao = new Eleicoes(totalEleitores, votosValidos, votosEmBranco, votosNulos);
+
+        System.out.printf("Percentual de votos válidos: %.2f%%\n", eleicao.calcularPercentualVotosValidos());
+        System.out.printf("Percentual de votos em branco: %.2f%%\n", eleicao.calcularPercentualVotosEmBranco());
+        System.out.printf("Percentual de votos nulos: %.2f%%\n", eleicao.calcularPercentualVotosNulos());
 
         scanner.close();
     }
